@@ -50,16 +50,15 @@ x_aleatorio += x_centro
 y_aleatorio += y_centro
 
 #agregar ruido a los puntos
-for i in range(len(x_aleatorio)):
+for i in range(len(x_aleatorio[0])):
     ruido=(0.05* np.random.rand())
     angulo_ruido=2*np.pi*np.random.rand()
     x_ruido , y_ruido= pol2cart(ruido,angulo_ruido)
-    x_aleatorio[i]= x_aleatorio[i]+x_ruido
-    y_aleatorio[i]= y_aleatorio[i]+y_ruido
+    x_aleatorio[0][i]= x_aleatorio[0][i]+x_ruido
+    y_aleatorio[0][i]= y_aleatorio[0][i]+y_ruido
 
-print(x_aleatorio[0])
 #para hacer la regresion se utiliza polyfit, esta funcion utiliza minimos cuadrados para ajustar los datos a un polinomio
-polinomio=np.poly1d(np.polyfit(np.array(x_aleatorio), np.array(y_aleatorio), 3))
+polinomio=np.poly1d(np.polyfit(x_aleatorio[0], y_aleatorio[0], 4))
 
 
 fig, figura = plt.subplots(2,2)
@@ -67,7 +66,7 @@ figura[0,0].plot(x,y)
 figura[0,0].set_title('Elipse Original: Eje mayor = '+ str(round(Mayor,5))+'; Eje menor = '+ str(round(Menor,5))+';centro = ('+str(round(x_centro,5))+','+ str(round(y_centro,5))+')')
 figura[0,1].scatter(x_aleatorio,y_aleatorio)
 figura[0,1].set_title('5000 puntos aleatorios de la elipse con perturbacion')
-figura[1,0].plot(x_aleatorio,polinomio(x_aleatorio))
+figura[1,0].plot(x,polinomio(x))
 figura[1,0].set_title('Elipse minimos cuadrados: Eje mayor = '+ str(round(Mayor,5))+'; Eje menor = '+ str(round(Menor,5))+';centro = ('+str(round(x_centro,5))+','+ str(round(y_centro,5))+')')
 #elipse_original = fig.add_subplot(111, projection='polar')
 #elipse_original.scatter(Theta+Angulo_centro,elipse)
