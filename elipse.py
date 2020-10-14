@@ -130,8 +130,8 @@ error_rel_area = error_abs_area/area_original
 error_per_area = error_rel_area*100
 
 #perimetros
-function_ellipse_original_perimeter = lambda x : (1+(((-x*b)/((a**2)*((a-(x**2))**0.5)))**2))**0.5
-function_ellipse_fit__perimeter = lambda x : (1+(((-x*fit_axis[1])/((fit_axis[0]**2)*((fit_axis[0]-(x**2))**0.5)))**2))**0.5
+function_ellipse_original_perimeter = lambda x : (1+(((-x*b)/((a**2)*(((a**2)-(x**2))**0.5)))**2))**0.5
+function_ellipse_fit__perimeter = lambda x : (1+(((-x*fit_axis[1])/((fit_axis[0]**2)*(((fit_axis[0]**2)-(x**2))**0.5)))**2))**0.5
 perimetro_original, err_perimetro_original = scipy.integrate.quad(function_ellipse_original_perimeter, -a/2, a/2)
 perimetro_fit, err_perimetro_fit = scipy.integrate.quad(function_ellipse_fit__perimeter, -fit_axis[0]/2, fit_axis[0]/2)
 error_abs_perimetro = abs(perimetro_original-perimetro_fit)
